@@ -50,7 +50,8 @@ public class RNSmsAndroidModule extends ReactContextBaseJavaModule {
 
         try {
            SmsManager smsManager = SmsManager.getDefault();
-           smsManager.sendTextMessage(phoneNumberString,null,body,null,null);
+           ArrayList<String> parts = smsManager.divideMessage(body);
+           smsManager.sendMultipartTextMessage(phoneNumberString,null,parts,null,null);
            callback.invoke(null,"success");
         }
 
